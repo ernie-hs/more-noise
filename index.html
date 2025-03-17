@@ -89,7 +89,7 @@
     varying vec3 v_normal;
 
     void main() {
-      float h = noise(position) * 0.25;
+      float h = noise(position) * 0.35;
       vec3 n = h * normal;
       v_normal = normal;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position + n, 1.0);

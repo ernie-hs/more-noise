@@ -3,8 +3,10 @@ import { ArcballControls } from 'three/examples/jsm/Addons.js';
 
 const canvas = document.querySelector("#grid");
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+const renderer = new THREE.WebGLRenderer({ 
+  canvas: canvas
+ });
 const control = new ArcballControls(camera, canvas, scene);
 
 camera.position.y = 1;
@@ -12,6 +14,11 @@ camera.position.z = 25;
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
+
+const seaGeometry = new THREE.SphereGeometry(8, 128, 128);
+const seaMaterial = new THREE.MeshBasicMaterial({color: "cornflowerblue"});
+const sea = new THREE.Mesh(seaGeometry, seaMaterial);
+scene.add(sea);
 
 const geometry = new THREE.SphereGeometry(8, 128, 128);
 const material = new THREE.ShaderMaterial({
@@ -23,11 +30,6 @@ const material = new THREE.ShaderMaterial({
 
 const landscape = new THREE.Mesh(geometry, material);
 scene.add(landscape);
-
-const seaGeometry = new THREE.SphereGeometry(8);
-const seaMaterial = new THREE.MeshBasicMaterial({color: "cornflowerblue"});
-const sea = new THREE.Mesh(seaGeometry, seaMaterial);
-scene.add(sea);
 
 function animate() {
   landscape.rotation.y += 0.001;
